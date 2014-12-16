@@ -22,8 +22,7 @@ public class Main extends HttpServlet {
   private void showHome(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     try {
-      Thread.sleep(61000);
-      resp.getWriter().print("Hello from Java!");
+      resp.getWriter().print("Hello from Java!" + Charset.defaultCharset());
     }
     catch (Exception e) {
       resp.getWriter().print("The sleep was interupted!");
