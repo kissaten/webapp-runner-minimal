@@ -6,6 +6,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author Joe Kutner on 10/19/17.
@@ -27,11 +28,8 @@ public class DrainFilter implements Filter {
   }
 
   public void destroy() {
-    // maybe we can block on this going to zero?
-    // i think there is a semaphore thing that can have many lock holders
     while (activeConnections.get() > 0) {
-      try { Thread.sleep(1000); } catch (InterruptedException e) { throw new RuntimeException(e);
-      }
+      LockSupport.parkNanos(activeConnections, 1);
     }
   }
 }
