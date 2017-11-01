@@ -16,6 +16,15 @@
         <servlet-class>Main</servlet-class>
     </servlet>
 
+    <filter>
+        <filter-name>DrainFilter</filter-name>
+        <filter-class>DrainFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DrainFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/*</url-pattern>
